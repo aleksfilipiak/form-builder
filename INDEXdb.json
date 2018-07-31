@@ -1,0 +1,20 @@
+{
+  "inputs": [
+    {
+      "lvl" : 0,
+      "question": "Do you have a car?",
+      "type": "yes/no",
+      "sublvl1" : [
+        {
+          "lvl" : 1,
+          "condition" : "yes",
+          "question" : "What's model?",
+          "type" : "text",
+          "sublvl2" : [
+
+          ]
+        }
+      ]
+    }
+  ]
+}
