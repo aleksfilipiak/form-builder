@@ -12,17 +12,24 @@ constructor (props){
     doneClicked = () => {
         console.log("działa2");
         this.setState({
-            counter2: this.state.counter + 1
+            counter2: this.state.counter2 + 1
         })
     };
-    showCounter= ()=>{
-        console.log(`counter lvl1: ${this.state.counter2}`);
-    }
+    giveInputConst = () =>{
+        console.log(`counter 2: ${this.state.counter2}`);
+        const inputs =[];
+        for (let i=0; i<this.state.counter2;i++){
+            if (this.state.counter2 > 0) {
+                inputs.push(<Input number={33} key={i}/>)};
+        }
+        return <div>{inputs}</div>
+    };
+
 
     render() {
         return (
             <div>
-                {this.showCounter()}
+                <h4>{this.props.number}</h4>
                 <form action="" className="group-form">
                     <div className="form-row">
                         <label htmlFor="" className="col">Condition</label>
@@ -41,7 +48,7 @@ constructor (props){
                 </form>
                 <AddDeleteBtns adding={this.doneClicked}
                 />
-                {this.state.counter2 > 0 && <Input/>}
+                {this.giveInputConst()}
             </div>
         )
     }

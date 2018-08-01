@@ -14,8 +14,7 @@ export default class First_input extends React.Component {
     }
 
     doneClicked = () => {
-        console.log("działa1");
-        console.log(this.state.counter);
+        console.log(`counter przy doneClicked: ${this.state.counter}`);
         this.setState({
             counter: this.state.counter + 1,
             counter1: this.state.counter1 + 1
@@ -23,26 +22,25 @@ export default class First_input extends React.Component {
 
     };
 
-    showCounter = () => {
+
+
+    giveInputConst = () =>{
         console.log(`counter 0: ${this.state.counter}`);
         console.log(`counter 1: ${this.state.counter1}`);
-    }
 
-    shouldComponentUpdate () {
-        const giveInputConst = giveInputConst  (() =>{
-            if (this.state.counter1 > this.state.counter && this.state.counter > 0) {
-                return <Input/>
-            }
-        })
-    }
 
+
+        const inputs =[];
+        for (let i=0; i<this.state.counter;i++){
+            if (this.state.counter > 0) {
+                inputs.push(<Input number={22} key={i}/>)};
+        }
+        return <div>{inputs}</div>
+    };
 
     render() {
-
         return (
-
             <div>
-
                 <form className="form-group ">
                     <label>Question</label>
                     <input type="text" className="form-control"/>
@@ -54,8 +52,7 @@ export default class First_input extends React.Component {
                     </select>
                 </form>
                 <AddDeleteBtns adding={this.doneClicked}/>
-                {this.giveInputConst}
-                {this.showCounter()}
+                {this.giveInputConst()}
             </div>
         )
     }
