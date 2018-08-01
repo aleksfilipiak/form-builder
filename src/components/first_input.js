@@ -9,9 +9,9 @@ export default class First_input extends React.Component {
         this.state = {
             lvl: 0,
             counter: 0,
-            counter1: 1,
             classLvl: 0,
-            number: 100
+            number: 100,
+            inputs: []
         }
     }
 
@@ -19,7 +19,6 @@ export default class First_input extends React.Component {
         console.log(`counter przy doneClicked: ${this.state.counter}`);
         this.setState({
             counter: this.state.counter + 1,
-            counter1: this.state.counter1 + 1
         });
 
     };
@@ -27,17 +26,17 @@ export default class First_input extends React.Component {
 
     giveInputConst = () => {
         console.log(`counter 0: ${this.state.counter}`);
-        console.log(`counter 1: ${this.state.counter1}`);
-
 
         const inputs = [];
         for (let i = 0; i < this.state.counter; i++) {
-            if (this.state.counter > 0) {
-                inputs.push(<Input number={this.state.number + i} class={this.state.classLvl + 1} key={i}/>)
+            if (this.state.counter - i === 1) {
+                this.state.inputs.push(<Input number={this.state.number + i} class={this.state.classLvl + 1} key={this.state.number+ i}/>)
             }
             ;
         }
-        return <div>{inputs}</div>
+        console.log("z firsta inputy");
+        console.log(this.state.inputs);
+        return this.state.inputs
     };
 
     render() {

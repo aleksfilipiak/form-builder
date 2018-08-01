@@ -11,7 +11,7 @@ export default class Input extends React.Component {
             number: this.props.number,
             inputs: []
         }
-        this.deleteInput = this.deleteInput.bind(this)
+        // this.deleteInput = this.deleteInput.bind(this)
     }
     doneClicked = () => {
         console.log("działa2");
@@ -23,36 +23,41 @@ export default class Input extends React.Component {
         console.log(`counter 2: ${this.state.counter2}`);
         const inputs = [];
         for (let i = 0; i < this.state.counter2; i++) {
-            if (this.state.counter2 > 0) {
+            if (this.state.counter2 - i === 1) {
                 this.state.inputs.push(<Input number={this.state.number + i + 100} key={this.state.number + i +100 }
                                               class={this.state.klasa + 1}/>)
             }
         }
-        console.log(`nowe inputy: ${this.state.inputs}`)
+        // console.log(`nowe inputy: ${this.state.inputs}`)
         console.log(this.state.inputs);
         return this.state.inputs
     };
-    deleteInput = (num) => {
-        // if(this.state.counter2 >=1) {
-        //     for (let i = 0; i < this.state.counter2; i++) {
-        //         console.log(this.giveInputConst()[i].props.number)
-        //     }
-        // }
-
-        // const newInputs = this.giveInputConst().filter(input => {
-        //     console.log(input.props.number);
-        //     return input.props.number !== number;
-        // })
-        // console.log(newInputs);
-        // this.state.inputs = newInputs
-        this.giveInputConst().forEach(function (value) {
-            num = value.key
-        })
-        this.setState(prevState => ({
-            inputs: prevState.inputs.filter(el => el != num)
-        }))
-
-    };
+    // deleteInput = (num) => {
+    //
+    //     // console.log(this.state.inputs);
+    //     console.log("del działa");
+    //     if(this.state.counter2 >=1) {
+    //         for (let i = 0; i < this.state.counter2; i++) {
+    //             console.log("kliknięty obiekt del");
+    //             console.log(this.giveInputConst()[i].props.number - 100)
+    //         }
+    //     }
+    //
+    //     // const newInputs = this.giveInputConst().filter(input => {
+    //     //     console.log(input.props.number);
+    //     //     return input.props.number !== number;
+    //     // })
+    //
+    //     // console.log(newInputs);
+    //     // let newInputsthis = this.state.inputs;
+    //     this.giveInputConst().forEach(function (value) {
+    //         num = value.key
+    //     })
+    //     this.setState(prevState => ({
+    //         inputs: prevState.inputs.filter(el => el !== num)
+    //     }))
+    //
+    // };
 
     render() {
         return (
