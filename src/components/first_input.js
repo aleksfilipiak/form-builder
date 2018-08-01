@@ -9,7 +9,9 @@ export default class First_input extends React.Component {
         this.state = {
             lvl: 0,
             counter: 0,
-            counter1: 1
+            counter1: 1,
+            classLvl: 0,
+            number: 100
         }
     }
 
@@ -23,24 +25,24 @@ export default class First_input extends React.Component {
     };
 
 
-
-    giveInputConst = () =>{
+    giveInputConst = () => {
         console.log(`counter 0: ${this.state.counter}`);
         console.log(`counter 1: ${this.state.counter1}`);
 
 
-
-        const inputs =[];
-        for (let i=0; i<this.state.counter;i++){
+        const inputs = [];
+        for (let i = 0; i < this.state.counter; i++) {
             if (this.state.counter > 0) {
-                inputs.push(<Input number={22} key={i}/>)};
+                inputs.push(<Input number={this.state.number + i} class={this.state.classLvl + 1} key={i}/>)
+            }
+            ;
         }
         return <div>{inputs}</div>
     };
 
     render() {
         return (
-            <div>
+            <div className={`classLvl${this.state.classLvl}`}>
                 <form className="form-group ">
                     <label>Question</label>
                     <input type="text" className="form-control"/>
@@ -52,7 +54,10 @@ export default class First_input extends React.Component {
                     </select>
                 </form>
                 <AddDeleteBtns adding={this.doneClicked}/>
-                {this.giveInputConst()}
+                <div>
+                    {this.giveInputConst()}
+                </div>
+
             </div>
         )
     }

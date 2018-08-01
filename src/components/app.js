@@ -6,21 +6,33 @@ export default class App extends React.Component {
 constructor (props){
     super(props);
     this.state={
-        firstInputClicked: false
+        counter0: 0,
     }
 }
 
-    addFirstInput = () => {
+    doneClickedFirst = () =>{
+    console.log("counter firsta działa");
         this.setState({
-            firstInputClicked: true
+            counter0: this.state.counter0 + 1
         })
+    };
+    addFirstInput = () => {
+
+        const firstInputs =[];
+        for (let i=0; i<this.state.counter0; i++){
+            if (this.state.counter0 > 0 ){
+                firstInputs.push(<FirstInput key={i}/>)
+            }
+
+        }
+        return <div>{firstInputs}</div>
     };
 
     render() {
         return <div>
             <h1>Form builder</h1>
-            {this.state.firstInputClicked === true && <FirstInput className="mb-3"/> }
-            <button className="btn btn-primary" onClick={this.addFirstInput}>Add Input</button>
+            <button className="btn btn-primary" onClick={this.doneClickedFirst}>Add Input</button>
+            {this.addFirstInput()}
         </div>
     }
 }

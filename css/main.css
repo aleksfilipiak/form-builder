@@ -2,3 +2,21 @@ button{
     margin: 0 !important;
 
 }
+
+.classLvl0{
+    background-color: crimson !important;
+}
+.classLvl1{
+    background-color: green !important;
+    margin-left: 30px;
+}
+
+.classLvl2{
+    background-color: rebeccapurple !important;
+    margin-left: 60px;
+}
+
+.classLvl3 {
+    background-color: blue !important;
+    margin-left: 90px;
+}
