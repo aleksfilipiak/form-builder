@@ -7,6 +7,7 @@ constructor (props){
     super(props);
     this.state={
         counter0: 0,
+        firstInputs: []
     }
 }
 
@@ -20,12 +21,14 @@ constructor (props){
 
         const firstInputs =[];
         for (let i=0; i<this.state.counter0; i++){
-            if (this.state.counter0 > 0 ){
-                firstInputs.push(<FirstInput key={i}/>)
+            if (this.state.counter0 - i === 1 ){
+                this.state.firstInputs.push(<FirstInput key={i}/>)
             }
 
         }
-        return <div>{firstInputs}</div>
+        console.log(`inputy typu first`);
+        console.log(this.state.firstInputs);
+        return <div>{this.state.firstInputs}</div>
     };
 
     render() {

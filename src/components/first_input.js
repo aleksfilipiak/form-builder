@@ -11,7 +11,8 @@ export default class First_input extends React.Component {
             counter: 0,
             classLvl: 0,
             number: 100,
-            inputs: []
+            inputs: [],
+            typeOfAnswer: "text"
         }
     }
 
@@ -30,13 +31,23 @@ export default class First_input extends React.Component {
         const inputs = [];
         for (let i = 0; i < this.state.counter; i++) {
             if (this.state.counter - i === 1) {
-                this.state.inputs.push(<Input number={this.state.number + i} class={this.state.classLvl + 1} key={this.state.number+ i}/>)
+                this.state.inputs.push(<Input number={this.state.number + i}
+                                              class={this.state.classLvl + 1}
+                                              key={this.state.number + i}
+                                              typeOfAnswer={this.state.typeOfAnswer}/>)
             }
-            ;
         }
         console.log("z firsta inputy");
         console.log(this.state.inputs);
-        return this.state.inputs
+        return this.state.inputs;
+    };
+
+    selectedValue = (event) => {
+        event.preventDefault();
+        this.setState({
+            [event.currentTarget.id]: event.currentTarget.value
+        });
+        console.log(event.currentTarget.value);
     };
 
     render() {
@@ -46,7 +57,10 @@ export default class First_input extends React.Component {
                     <label>Question</label>
                     <input type="text" className="form-control"/>
                     <label>Type</label>
-                    <select name="" id="typeOfAnswer" className="form-control mb-3">
+                    <select id="typeOfAnswer"
+                            className="form-control mb-3"
+                            onChange={this.selectedValue}
+                            value={this.state.typeOfAnswer}>
                         <option value="text">Text</option>
                         <option value="number">Number</option>
                         <option value="radio">Yes/No</option>

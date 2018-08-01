@@ -9,10 +9,13 @@ export default class Input extends React.Component {
             counter2: 0,
             klasa: this.props.class,
             number: this.props.number,
-            inputs: []
+            inputs: [],
+            typeOfAnswer: this.props.typeOfAnswer,
+            condition: ''
         }
         // this.deleteInput = this.deleteInput.bind(this)
     }
+
     doneClicked = () => {
         console.log("działa2");
         this.setState({
@@ -24,11 +27,11 @@ export default class Input extends React.Component {
         const inputs = [];
         for (let i = 0; i < this.state.counter2; i++) {
             if (this.state.counter2 - i === 1) {
-                this.state.inputs.push(<Input number={this.state.number + i + 100} key={this.state.number + i +100 }
+                this.state.inputs.push(<Input number={this.state.number + i + 100}
+                                              key={this.state.number + i + 100}
                                               class={this.state.klasa + 1}/>)
             }
         }
-        // console.log(`nowe inputy: ${this.state.inputs}`)
         console.log(this.state.inputs);
         return this.state.inputs
     };
@@ -59,6 +62,47 @@ export default class Input extends React.Component {
     //
     // };
 
+    selectedValue = (event) => {
+        this.setState({
+            [event.currentTarget.id]: event.currentTarget.value
+        });
+        console.log(event.currentTarget.value);
+    };
+
+    conditioning = () =>{
+        if (this.props.typeOfAnswer === "text"){
+            return <select name="" id="typeOfAnswer" className='form-control col-6'>
+                <option value='equals'>Equals</option></select>
+        }
+        if (this.props.typeOfAnswer === "number"){
+            return <select name="" id="typeOfAnswer" className='form-control col-6'>
+                <option value="equals">Equals</option>
+                <option value="lessThen">Less then</option>
+                <option value="greaterThen"> Greater then</option></select>
+        }
+        if (this.props.typeOfAnswer === "radio"){
+            return <select name="" id="typeOfAnswer" className='form-control col-6'>
+                <option value="equals">Equals</option>
+            </select>
+        }
+    };
+
+    conditioningValue =() =>{
+        if (this.props.typeOfAnswer === "text"){
+            return <input type="text" className="form-control col-6 "/>
+        }
+        if (this.props.typeOfAnswer === "number"){
+            return <input type="number" className="form-control col-6"/>
+        }
+        if (this.props.typeOfAnswer === "radio"){
+            return <select name="" id="typeOfCondition" className='form-control col-6'>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+        }
+    };
+
+
     render() {
         return (
             <div className={`classLvl${this.props.class}`}>
@@ -67,14 +111,18 @@ export default class Input extends React.Component {
                     <form action="" className="group-form">
                         <div className="form-row">
                             <label htmlFor="" className="col">Condition</label>
-                            <input value="zalezy od poprzedniego" className="form-control col"/>
-                            {/*<select name="" id=""></select>*/}
-                            <input type="text" value="zalezu od poprzedniego" className="form-control col"/>
+                            {this.conditioning()}
+                            {/*<input value="zalezy od poprzedniego" className="form-control col"/>*/}
+
+                            {this.conditioningValue()}
                         </div>
                         <label htmlFor="">Question</label>
                         <input type="text" className="form-control"/>
                         <label htmlFor="">Type</label>
-                        <select name="" id="typeOfAnswer" className="form-control mb-3">
+                        <select id="typeOfAnswer"
+                                className="form-control mb-3"
+                                onChange={this.selectedValue}
+                                value={this.state.typeOfAnswer}>
                             <option value="text">Text</option>
                             <option value="number">Number</option>
                             <option value="radio">Yes/No</option>
