@@ -8,10 +8,11 @@ export default class Input extends React.Component {
             lvl: 1,
             counter2: 0,
             klasa: this.props.class,
-            number: this.props.number
+            number: this.props.number,
+            inputs: []
         }
+        this.deleteInput = this.deleteInput.bind(this)
     }
-
     doneClicked = () => {
         console.log("działa2");
         this.setState({
@@ -23,13 +24,35 @@ export default class Input extends React.Component {
         const inputs = [];
         for (let i = 0; i < this.state.counter2; i++) {
             if (this.state.counter2 > 0) {
-                inputs.push(<Input number={this.state.number + i + 100} key={i} class={this.state.klasa + 1} />)
+                this.state.inputs.push(<Input number={this.state.number + i + 100} key={this.state.number + i +100 }
+                                              class={this.state.klasa + 1}/>)
             }
-            ;
         }
-        return <div>{inputs}</div>
+        console.log(`nowe inputy: ${this.state.inputs}`)
+        console.log(this.state.inputs);
+        return this.state.inputs
     };
+    deleteInput = (num) => {
+        // if(this.state.counter2 >=1) {
+        //     for (let i = 0; i < this.state.counter2; i++) {
+        //         console.log(this.giveInputConst()[i].props.number)
+        //     }
+        // }
 
+        // const newInputs = this.giveInputConst().filter(input => {
+        //     console.log(input.props.number);
+        //     return input.props.number !== number;
+        // })
+        // console.log(newInputs);
+        // this.state.inputs = newInputs
+        this.giveInputConst().forEach(function (value) {
+            num = value.key
+        })
+        this.setState(prevState => ({
+            inputs: prevState.inputs.filter(el => el != num)
+        }))
+
+    };
 
     render() {
         return (
@@ -53,6 +76,7 @@ export default class Input extends React.Component {
                         </select>
                     </form>
                     <AddDeleteBtns adding={this.doneClicked}
+                                   deleting={this.deleteInput}
                     />
                 </div>
                 <div>
