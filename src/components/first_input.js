@@ -12,21 +12,24 @@ export default class First_input extends React.Component {
             classLvl: 0,
             number: 100,
             inputs: [],
-            typeOfAnswer: "text"
+            typeOfAnswer: "text",
+            condition: ""
         }
     }
 
     doneClicked = () => {
-        console.log(`counter przy doneClicked: ${this.state.counter}`);
+        console.log("RUN doneClicked w firstInpucie");
+
         this.setState({
             counter: this.state.counter + 1,
         });
-
+        console.log(`counter: ${this.state.counter}`);
     };
 
 
     giveInputConst = () => {
-        console.log(`counter 0: ${this.state.counter}`);
+        console.log("RUN giveInputConst Z FIRSTA");
+        console.log(`counter: ${this.state.counter}`);;
 
         const inputs = [];
         for (let i = 0; i < this.state.counter; i++) {
@@ -34,10 +37,11 @@ export default class First_input extends React.Component {
                 this.state.inputs.push(<Input number={this.state.number + i}
                                               class={this.state.classLvl + 1}
                                               key={this.state.number + i}
-                                              typeOfAnswer={this.state.typeOfAnswer}/>)
+                                              typeOfAnswer={this.state.typeOfAnswer}
+                                              condition={this.state.condition}/>)
             }
         }
-        console.log("z firsta inputy");
+        console.log("z firsta inputy oraz END giveInputConst Z FIRSTA");
         console.log(this.state.inputs);
         return this.state.inputs;
     };
@@ -51,8 +55,10 @@ export default class First_input extends React.Component {
     };
 
     render() {
+        console.log("RUN render Z FIRSTA");
         return (
             <div className={`classLvl${this.state.classLvl}`}>
+                {/*<h3>{this.props.number}</h3>*/}
                 <form className="form-group ">
                     <label>Question</label>
                     <input type="text" className="form-control"/>
@@ -67,10 +73,7 @@ export default class First_input extends React.Component {
                     </select>
                 </form>
                 <AddDeleteBtns adding={this.doneClicked}/>
-                <div>
-                    {this.giveInputConst()}
-                </div>
-
+                {this.giveInputConst()}
             </div>
         )
     }
