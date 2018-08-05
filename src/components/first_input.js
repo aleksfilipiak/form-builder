@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import AddDeleteBtns from "./add_sub_input";
 import Input from "./input"
 
-
 export default class First_input extends React.Component {
     constructor(props) {
         super(props);
@@ -13,36 +12,28 @@ export default class First_input extends React.Component {
             number: 100,
             inputs: [],
             typeOfAnswer: "text",
-            condition: ""
+            condition: "",
+            question: ''
         }
     }
 
     doneClicked = () => {
-        console.log("RUN doneClicked w firstInpucie");
-
         this.setState({
-            counter: this.state.counter + 1,
+            counter: this.state.counter + 1
         });
-        console.log(`counter: ${this.state.counter}`);
     };
 
-
     giveInputConst = () => {
-        console.log("RUN giveInputConst Z FIRSTA");
-        console.log(`counter: ${this.state.counter}`);;
-
-        const inputs = [];
         for (let i = 0; i < this.state.counter; i++) {
             if (this.state.counter - i === 1) {
-                this.state.inputs.push(<Input number={this.state.number + i}
-                                              class={this.state.classLvl + 1}
-                                              key={this.state.number + i}
-                                              typeOfAnswer={this.state.typeOfAnswer}
-                                              condition={this.state.condition}/>)
+                this.state.inputs
+                    .push(<Input number={this.state.number + i}
+                                 class={this.state.classLvl + 1}
+                                 key={this.state.number + i}
+                                 typeOfAnswer={this.state.typeOfAnswer}
+                                 condition={this.state.condition}/>)
             }
         }
-        console.log("z firsta inputy oraz END giveInputConst Z FIRSTA");
-        console.log(this.state.inputs);
         return this.state.inputs;
     };
 
@@ -51,21 +42,27 @@ export default class First_input extends React.Component {
         this.setState({
             [event.currentTarget.id]: event.currentTarget.value
         });
-        console.log(event.currentTarget.value);
+    };
+    changeHandlerInput = (event) => {
+        this.setState({
+            [event.currentTarget.id]: event.currentTarget.value
+        })
     };
 
     render() {
-        console.log("RUN render Z FIRSTA");
         return (
             <div className={`classLvl${this.state.classLvl}`}>
-                {/*<h3>{this.props.number}</h3>*/}
                 <form className="form-group ">
                     <label>Question</label>
-                    <input type="text" className="form-control"/>
+                    <input type="text"
+                           className="form-control"
+                           value={this.state.question}
+                           onChange={this.selectedValue}
+                           id="question"/>
                     <label>Type</label>
                     <select id="typeOfAnswer"
                             className="form-control mb-3"
-                            onChange={this.selectedValue}
+                            onChange={this.changeHandlerInput}
                             value={this.state.typeOfAnswer}>
                         <option value="text">Text</option>
                         <option value="number">Number</option>
