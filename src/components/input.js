@@ -19,43 +19,48 @@ export default class Input extends React.Component {
         }
     }
 
-    // componentWillMount() {
-    //     console.log("component will mount");
-    //     this.deleteInput()
-    // }
-    //
-    // componentDidMount() {
-    //     console.log("component did mount");
-    //     this.deleteInput()
-    // }
-    //
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("component will receive props");
-    //     if (nextProps.number, 200 !== this.props.number, 200) {
-    //         this.setState({loaded: false})
-    //         console.log("component will receive props and loaded: " + this.state.loaded);
-    //     }
-    // }
-    //
-    // shouldComponentUpdate(nextProps, nextState){
-    //     console.log( "shouldComponentUpdate");
-    //     return  nextState.question !== this.state.question
-    // }
-    //
-    // componentDidUpdate(){ console.log("component did update and "+"this.state. loaded" + this.state.loaded +" and this.state.counter2: "+ this.state.counter2)
-    //     }
-    //
-    // componentWillUnmount (){ console.log("component will unmount");}
-
 
     doneClicked = () => {
         this.setState({
             counter2: this.state.counter2 + 1,
             delClicked: false
         });
+    }
+
+    componentDidMount() {
+
+        this.baseUrl = `http://localhost:3001/inputs`;
+        const example = {
+            id: this.state.number,
+            class: this.state.class,
+            typeOfAnswer: this.state.typeOfAnswer,
+            condition: this.state.condition,
+            question: this.state.question,
+            typeOfCond: this.state.typeOfCond,
+            children: [...this.state.inputs]
+        };
+
+        fetch(this.baseUrl, {
+            method: 'POST',
+            body: JSON.stringify(example),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(res => {
+                if (res.ok)
+                    return res.json();
+                else
+                    throw new Error('bład POST');
+            })
+            .then(() => console.log('post klika sie'))
+            .catch(err => console.log(err));
+
     };
 
     delClicked = () => {
+
+
         this.setState({
             delClicked: true,
             loaded: this.state.loaded + 1,
@@ -89,17 +94,23 @@ export default class Input extends React.Component {
                 }
             }
         }
+        console.log("gieInputConst");
         return this.state.inputs
     };
 
-    deleteInput = (index, e) => {
-        if (this.state.delClicked === true) {
-            const newInputs = this.state.inputs;
-            newInputs.splice(index, 2);
-            this.setState({
-                inputs: [...newInputs]
-            })
+    componentWillReceiveProps(nextProps) {
+        if (this.props.delClicked !== nextProps.delClicked) {
+            this.deleteInput(nextProps.delClicked)
         }
+    }
+
+    deleteInput = (index) => {
+
+        const newInputs = this.state.inputs;
+        newInputs.splice(index, 2);
+        this.setState({
+            inputs: [...newInputs]
+        });
         return this.state.inputs
     };
 
@@ -164,11 +175,13 @@ export default class Input extends React.Component {
         }
     };
 
-    wannaDelete = () =>{
-       this.state.inputs.map(item => console.log(item.key));
+    wannaDelete = () => {
+        this.state.inputs.map(item => console.log(item.key));
+        console.log(this.state.inputs);
     }
 
     render() {
+        console.log("render");
         return (
             <div className={`classLvl${this.props.class}`}>
                 <h4>{this.props.number}</h4>

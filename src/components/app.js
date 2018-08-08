@@ -24,11 +24,13 @@ export default class App extends React.Component {
         return <div>{this.state.firstInputs}</div>
     };
 
+
     render() {
         return <div>
             <h1>Form builder</h1>
             <button className="btn btn-primary" onClick={this.doneClickedFirst}>Add Input</button>
             {this.addFirstInput()}
+            <button onClick={this.addFormToBase} className="btn btn-primary mt-3">Add Form</button>
         </div>
     }
 }
